@@ -19,9 +19,9 @@ public class Deadlock implements Runnable {
         }
         log.info("done doX");
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new Deadlock();
-    }
+    }*/
 
     @Override
     public void run() {

@@ -18,10 +18,10 @@ public class Unlock implements Runnable {
         new Thread(this::run2).start();
     }
 
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         new Unlock(x,y,new ReentrantLock());
         log.info(": Main finish");
-    }
+    }*/
 
     @Override
     public void run() {
