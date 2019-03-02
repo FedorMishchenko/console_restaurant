@@ -82,7 +82,6 @@ public class Unlock implements Runnable {
                 e.printStackTrace();
             }
             log.info(": inside doY");
-            log.info("");
         }
     }
 }
