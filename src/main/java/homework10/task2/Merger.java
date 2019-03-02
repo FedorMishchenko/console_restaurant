@@ -1,6 +1,6 @@
 package homework10.task2;
 
-public class Merger {
+ class Merger {
 
     private int[] unsorted, sorted;
 
@@ -8,7 +8,7 @@ public class Merger {
         this.unsorted = arrayIn;
     }
 
-    public void sort(){
+     void sort(){
         int middle;
         int[] left, right;
 
@@ -17,8 +17,7 @@ public class Merger {
             left = new int[middle];
             right = new int[unsorted.length - middle];
 
-            System.arraycopy(unsorted, 0, left, 0, middle);
-            System.arraycopy(unsorted, middle, right, 0, unsorted.length - middle);
+            copy(middle, left, right);
             Merger leftSorter = new Merger(left);
             Merger rightSorter = new Merger(right);
 
@@ -28,6 +27,11 @@ public class Merger {
         } else {
             sorted = unsorted;
         }
+    }
+
+    private void copy(int middle, int[] left, int[] right) {
+        System.arraycopy(unsorted, 0, left, 0, middle);
+        System.arraycopy(unsorted, middle, right, 0, unsorted.length - middle);
     }
 
     static int[] merge(int[] leftArray, int[] rightArray){
