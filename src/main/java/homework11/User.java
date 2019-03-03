@@ -13,24 +13,23 @@ public class User {
     private long salary;
     private Address address;
 
-
     public UUID getId() {return id;}
 
     public void setId(UUID id) {this.id = id;}
 
-    public String getName() {
+     String getName() {
         return name;
     }
 
-    public String getEmail() {
+     String getEmail() {
         return email;
     }
 
-    public int getAge() {
+     int getAge() {
         return age;
     }
 
-    public  long getSalary() {
+      long getSalary() {
         return salary;
     }
 
@@ -38,14 +37,13 @@ public class User {
         return address;
     }
 
-    public User(@NotNull Builder builder) {
+     User(@NotNull Builder builder) {
         this.name = builder.getName();
         this.id = builder.getId();
         this.email = builder.getEmail();
         this.age = builder.getAge();
         this.salary = builder.getSalary();
         this.address = builder.getAddress();
-
     }
 
     @Contract(value = "null -> false", pure = true)
@@ -78,7 +76,6 @@ public class User {
                 ", address: " + this.address.toString();
 
     }
-
 
     static class Builder {
         private String name;
@@ -144,7 +141,6 @@ public class User {
             return this;
         }
     }
-
 
     static class Address {
         private String country;
