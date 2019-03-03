@@ -1,4 +1,4 @@
-package homework12;
+package homework12.db;
 
 import org.apache.log4j.Logger;
 
@@ -11,13 +11,13 @@ public class JdbcConnector {
     private Statement statement = null;
     private ResultSet resultSet = null;
 
-    JdbcConnector(){
+    public JdbcConnector(){
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
             String username = "root";
             String password = "password";
             Class.forName(driver);
-            String dataBaseName = "test";
+            String dataBaseName = "restaurant";
             Properties properties = new Properties();
             properties.setProperty("user", username);
             properties.setProperty("password", password);

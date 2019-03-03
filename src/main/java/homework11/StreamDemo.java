@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class StreamDemo {
     @NotNull
-    public  List<User> list() {
+    private   List<User> list() {
         User user1 = new User(new User.Builder().id(new UUID(1L,3L)).name("Bill")
                 .email("bill@email").age(19).salary(250)
                 .address(new User.Address().country("USA").city("New York")
@@ -97,7 +97,6 @@ public class StreamDemo {
         System.out.printf("%-30s%n","User's names unique in array: ");
         System.out.printf("%9s%20s%n", "","--------------------------");
         for (String name : Objects.requireNonNull(x.findUserNamesUniqueInArray(arr))) {
-            /*print(name);*/
             System.out.printf("%10s%15s%10s%n", "|",name,"|");
         }
         System.out.printf("%9s%21s%n", "","--------------------------");
