@@ -22,7 +22,7 @@ public class UserDAO {
     public void create(String email){
         JdbcConnector connector = new JdbcConnector();
         try {
-            connector.executePrepStatement(script.CREATE_USER, email);
+            connector.executePreparedStatement(script.CREATE_USER, email);
             log.info("User successful created");
         }finally {
             connector.disconnectFromDB();
@@ -46,7 +46,7 @@ public class UserDAO {
     public void update(String user_id, String email){
         JdbcConnector connector = new JdbcConnector();
         try {
-            connector.executePrepStatement(script.UPDATE_USER_BYID + user_id, email );
+            connector.executePreparedStatement(script.UPDATE_USER_BYID + user_id, email );
             log.info("User successful updated");
         }finally {
             connector.disconnectFromDB();

@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
      static SQLScripts getInstance(){
         return new SQLScripts();
     }
-
 /*
     -----------------------------------------------------------------------
 */
@@ -20,7 +19,6 @@ import org.jetbrains.annotations.NotNull;
      final String UPDATE_USER_BYID = "UPDATE" +
              " restaurant.customer SET email = ?  WHERE id = ";
      final String DELETE_BYID = "DELETE FROM restaurant.customer WHERE id = ";
-
 /*
      -----------------------------------------------------------------------
 */
