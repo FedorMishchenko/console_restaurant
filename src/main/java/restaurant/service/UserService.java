@@ -1,6 +1,6 @@
-package homework12.service;
+package restaurant.service;
 
-import homework12.dao.UserDAO;
+import restaurant.dao.UserDAO;
 import org.apache.log4j.Logger;
 
 import java.util.Scanner;
@@ -8,28 +8,28 @@ import java.util.Scanner;
 public class UserService {
     private static final Logger log = Logger.getLogger(UserService.class);
     private Scanner scanner = new Scanner(System.in);
-    private static UserDAO converter = UserDAO.getInstance();
+    private static UserDAO handler = UserDAO.getInstance();
 
     public void create(){
         log.info("Enter email:");
         String email = scanner.nextLine();
-        converter.handleCreateStmt(email);
+        handler.createStmt(email);
     }
 
     public void read(){
-        converter.handleReadStmt();
+        handler.readStmt();
     }
 
     public void update(){
         log.info("Enter user_id");
         String user_id = scanner.nextLine();
-        converter.handleUpdateStmt(user_id);
+        handler.updateStmt(user_id);
 
     }
     public void delete(){
         log.info("Enter user_id");
         String user_id = scanner.nextLine();
-        converter.handleDeleteStmt(user_id);
+        handler.deleteStmt(user_id);
     }
 
 }

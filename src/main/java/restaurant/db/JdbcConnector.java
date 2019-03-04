@@ -1,4 +1,4 @@
-package homework12.db;
+package restaurant.db;
 
 import org.apache.log4j.Logger;
 
@@ -9,6 +9,7 @@ public class JdbcConnector {
     private static final Logger log = Logger.getLogger(JdbcConnector.class);
     private Connection connection = null;
     private Statement statement = null;
+    private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
     public JdbcConnector(){
@@ -58,10 +59,20 @@ public class JdbcConnector {
         }
     }
 
+    public void executePreparedStatement(String sql, String args){
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,args);
+        }catch (SQLException e){
+            log.info(e.getMessage());
+        }
+    }
+
     public void disconnectFromDB() {
         try {
             resultSet.close();
             statement.close();
+            preparedStatement.close();
             connection.close();
         }
         catch (Exception e) {

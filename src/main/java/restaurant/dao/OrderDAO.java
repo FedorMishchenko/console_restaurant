@@ -1,4 +1,4 @@
-package homework12.dao;
+package restaurant.dao;
 
 public class OrderDAO {
 
