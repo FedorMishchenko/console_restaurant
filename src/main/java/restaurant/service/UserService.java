@@ -13,23 +13,25 @@ public class UserService {
     public void create(){
         log.info("Enter email:");
         String email = scanner.nextLine();
-        handler.createStmt(email);
+        handler.create(email);
     }
 
     public void read(){
-        handler.readStmt();
+        handler.read();
     }
 
     public void update(){
         log.info("Enter user_id");
         String user_id = scanner.nextLine();
-        handler.updateStmt(user_id);
+        log.info("Enter new email:");
+        String email = scanner.nextLine();
+        handler.update(user_id, email);
 
     }
     public void delete(){
         log.info("Enter user_id");
         String user_id = scanner.nextLine();
-        handler.deleteStmt(user_id);
+        handler.delete(user_id);
     }
 
 }

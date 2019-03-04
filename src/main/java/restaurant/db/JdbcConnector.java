@@ -31,16 +31,16 @@ public class JdbcConnector {
                     "&useLegacyDatetimeCode=false"+
                     "&amp"+
                     "&serverTimezone=UTC";
-            connection = DriverManager.getConnection(url,properties );
+            connection = DriverManager.getConnection(url, properties);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             log.warn(e.getMessage());
         }
     }
-    public ResultSet readRecords(String stmt) {
+    public ResultSet readRecords(String sql_stmt) {
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(stmt);
+            resultSet = statement.executeQuery(sql_stmt);
             return resultSet;
         }
         catch (SQLException e) {
@@ -49,20 +49,21 @@ public class JdbcConnector {
         return resultSet;
     }
 
-    public void executeStatement(String stmt) {
+    public void executeStatement(String sql_stmt) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(stmt);
+            statement.executeUpdate(sql_stmt);
         }
         catch (SQLException e) {
             log.warn(e.getMessage());
         }
     }
 
-    public void executePreparedStatement(String sql, String args){
+    public void executePrStatement(String sql_stmt, String email){
         try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,args);
+            preparedStatement = connection.prepareStatement(sql_stmt);
+            preparedStatement.setString(1, email);
+            preparedStatement.executeUpdate();
         }catch (SQLException e){
             log.info(e.getMessage());
         }
