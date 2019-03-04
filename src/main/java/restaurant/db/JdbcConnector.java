@@ -59,7 +59,7 @@ public class JdbcConnector {
         }
     }
 
-    public void executePrStatement(String sql_stmt, String email){
+    public void executePrepStatement(String sql_stmt, String email){
         try {
             preparedStatement = connection.prepareStatement(sql_stmt);
             preparedStatement.setString(1, email);

@@ -1,8 +1,8 @@
 package restaurant.dao;
 
+import org.jetbrains.annotations.Contract;
 import restaurant.db.JdbcConnector;
 import org.apache.log4j.Logger;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.ResultSet;
@@ -22,7 +22,7 @@ public class UserDAO {
     public void create(String email){
         JdbcConnector connector = new JdbcConnector();
         try {
-            connector.executePrStatement(script.CREATE_USER, email);
+            connector.executePrepStatement(script.CREATE_USER, email);
             log.info("User successful created");
         }finally {
             connector.disconnectFromDB();
@@ -39,30 +39,29 @@ public class UserDAO {
                 log.info("Database is empty");
             }
         }catch (SQLException e){
-            log.info("In handleReadStmt(): " + e.getMessage());
-        }finally {
-            connector.disconnectFromDB();
+            log.info(e.getMessage());
         }
     }
 
     public void update(String user_id, String email){
         JdbcConnector connector = new JdbcConnector();
         try {
-            log.info("Updated user:");
-            ResultSet resultSet = new JdbcConnector().readRecords(script.GET_USER_BYID + user_id);
-            format(resultSet);
-            log.info("Enter new email:");
-            connector.executeStatement(script.UPDATE_USER_BYID + email);
+            connector.executePrepStatement(script.UPDATE_USER_BYID + user_id, email );
             log.info("User successful updated");
-        }catch (SQLException e){
-            log.warn(e.getMessage());
         }finally {
             connector.disconnectFromDB();
         }
 
     }
 
+
     public void delete(String user_id){
+        JdbcConnector connector = new JdbcConnector();
+        try {
+            connector.executeStatement(script.DELETE_BYID + user_id);
+        }finally {
+            connector.disconnectFromDB();
+        }
 
     }
 
