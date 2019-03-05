@@ -35,6 +35,12 @@ public class Service {
                 handler.create(index, args2);
                 break;
             case 3:
+                String []args3 = new String[2];
+                log.info("Enter item");
+                args3[0] = scanner.nextLine();
+                log.info("Enter price");
+                args3[1] = scanner.nextLine();
+                handler.create(index, args3);
                 break;
         }
     }

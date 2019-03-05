@@ -32,12 +32,14 @@ public class HandlerDAO {
                 log.info("Order successful created");
                 break;
             case 3:
+                connector.executePreparedStatement(script.CREATE_ITEM, args);
+                log.info("Item successful created");
                 break;
         }
     }
 
     public void read(Integer index, String id) {
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             switch (index){
                 case 1:
@@ -57,6 +59,12 @@ public class HandlerDAO {
                     }
                     break;
                 case 3:
+                    resultSet = connector.readRecords(script.GET_ITEMS);
+                    if (resultSet.next()) {
+                        format(resultSet);
+                    } else {
+                        log.info("Database is empty");
+                    }
                     break;
             }
         } catch (SQLException e) {

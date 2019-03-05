@@ -35,6 +35,8 @@ import org.jetbrains.annotations.NotNull;
     final String GET_ITEMS = "SELECT id, item, price FROM restaurant.menu";
     final String CREATE_ITEM = "INSERT INTO restaurant.menu (item, price) " +
             "VALUES ( ?, ? )";
-    
+    final String UPDATE_ITEM = "UPDATE restaurant.menu SET item = ?, price = ? " +
+            "WHERE id = ";
+    final String DELETE_ITEM = "DELETE FROM restaurant.menu WHERE id = ";
 
 }
