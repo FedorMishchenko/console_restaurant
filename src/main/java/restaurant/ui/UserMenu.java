@@ -67,6 +67,6 @@ import static java.lang.System.exit;
     }
 
      void login(){
-
+        displayMenu();
     }
 }

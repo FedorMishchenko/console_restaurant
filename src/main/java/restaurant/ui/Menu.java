@@ -32,7 +32,6 @@ public class Menu {
                         admin.check();
                         admin.displayMenu();
                     case 2:
-
                         user.login();
                     case 0:
                         service.exit();
