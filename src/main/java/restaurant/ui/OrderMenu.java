@@ -8,13 +8,13 @@ import java.util.Scanner;
 
 import static java.lang.System.exit;
 
-public class OrderMenu {
+ class OrderMenu {
     private static final Logger logger = Logger.getLogger(OrderMenu.class);
     private Scanner scanner = new Scanner(System.in);
     private Menu menu = new Menu();
     private Service service = Service.getInstance();
 
-    public void displayMenu(){
+     void displayMenu(){
         menu.format("USER MENU:","1: Create Order",
                 "2: Read Orders","3: Update Order",
                 "4: Delete Order",
@@ -46,6 +46,7 @@ public class OrderMenu {
 
                         break;
                     case 0:
+                        service.exit();
                         exit(0);
                     default:
                         logger.warn("Illegal argument");

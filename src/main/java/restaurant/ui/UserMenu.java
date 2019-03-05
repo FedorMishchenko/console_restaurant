@@ -8,13 +8,13 @@ import java.util.Scanner;
 
 import static java.lang.System.exit;
 
-public class UserMenu {
+ class UserMenu {
     private static final Logger logger = Logger.getLogger(UserMenu.class);
     private Menu menu = new Menu();
     private Service service = Service.getInstance();
     private Scanner scanner = new Scanner(System.in);
 
-    public void displayMenu(){
+     void displayMenu(){
         menu.format("USER MENU:","1: Create User",
                 "2: Read Users","3: Update User",
                 "4: Delete User",
@@ -35,10 +35,10 @@ public class UserMenu {
                         service.read(index);
                         displayMenu();
                     case 3:
-                        service.update();
+                        service.update(index);
                         displayMenu();
                     case 4:
-                        service.delete();
+                        service.delete(index);
                         displayMenu();
                     case 5:
                         break;

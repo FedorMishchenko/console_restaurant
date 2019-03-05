@@ -61,21 +61,61 @@ public class Service {
         }
     }
 
-    public void update(){
-        log.info("Enter user_id");
-        String user_id = scanner.nextLine();
-        log.info("Enter new email:");
-        String email = scanner.nextLine();
-        handler.update(user_id, email);
-
+    public void update(Integer index){
+        switch (index){
+            case 1:
+                String [] args1 = new String[2];
+                log.info("Enter user_id");
+                args1[0] = scanner.nextLine();
+                log.info("Enter new email:");
+                args1[1] = scanner.nextLine();
+                handler.update(index, args1);
+                break;
+            case 2:
+                String [] args2 = new String[3];
+                log.info("Enter user_id");
+                args2[0] = scanner.nextLine();
+                log.info("Enter item");
+                args2[1] = scanner.nextLine();
+                log.info("Enter price");
+                args2[2] = scanner.nextLine();
+                handler.update(index, args2);
+                break;
+            case 3:
+                String [] args3 = new String[3];
+                log.info("Enter item_id");
+                args3[0] = scanner.nextLine();
+                log.info("Enter item");
+                args3[1] = scanner.nextLine();
+                log.info("Enter price");
+                args3[2] = scanner.nextLine();
+                handler.update(index, args3);
+                break;
+        }
     }
-    public void delete(){
-        log.info("Enter user_id");
-        String user_id = scanner.nextLine();
-        handler.delete(user_id);
+
+    public void delete(Integer index){
+        switch (index){
+            case 1:
+                log.info("Enter user_id");
+                String user_id = scanner.nextLine();
+                handler.delete(index,user_id);
+                break;
+            case 2:
+                log.info("Enter order_id");
+                String order_id = scanner.nextLine();
+                handler.delete(index,order_id);
+                break;
+            case 3:
+                log.info("Enter item_id");
+                String item_id = scanner.nextLine();
+                handler.delete(index,item_id);
+                break;
+        }
     }
     public void exit(){
         handler.exit();
+        log.info("Connection close");
     }
 
 }

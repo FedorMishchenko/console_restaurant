@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import static java.lang.System.exit;
 
-public class AdminMenu {
+ class AdminMenu {
     private static final Logger logger = Logger.getLogger(AdminMenu.class);
     private final String password = "www";
     private Menu menu = new Menu();
@@ -16,8 +16,7 @@ public class AdminMenu {
     private Scanner scanner = new Scanner(System.in);
 
 
-    public void displayMenu() {
-        check();
+     void displayMenu() {
         menu.format("ADMIN MENU:", "1: Create Item",
                 "2: Items",
                 "3: Update Item", "4: Delete Item",
@@ -32,19 +31,21 @@ public class AdminMenu {
             while (true) {
                 switch (scanner.nextInt()) {
                     case 1:
-                        service.read(index);
-                        break;
+                        service.create(index);
+                        displayMenu();
                     case 2:
-
-                        break;
+                        service.read(index);
+                        displayMenu();
                     case 3:
-                        break;
+                        service.update(index);
+                        displayMenu();
                     case 4:
-
-                        break;
+                        service.delete(index);
+                        displayMenu();
                     case 5:
                         new Menu().displayMenu();
                     case 0:
+                        service.exit();
                         exit(0);
                     default:
                         logger.warn("Illegal argument");
@@ -58,10 +59,10 @@ public class AdminMenu {
     }
 
 
-    private void check () {
+     void check () {
         menu.format("Enter password:");
         if ((scanner.nextLine()).equals(password)) {
-            return;
+            logger.info("Password accepted");
         } else {
             logger.info("Invalid password");
             new Menu().displayMenu();

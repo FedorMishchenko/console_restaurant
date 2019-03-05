@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class HandlerDAO {
     private static final Logger log = Logger.getLogger(HandlerDAO.class);
@@ -70,24 +69,49 @@ public class HandlerDAO {
         } catch (SQLException e) {
             log.info(e.getMessage());
 
-        } finally {
+        } /*finally {
             connector.disconnectFromDB();
+        }*/
+    }
+
+
+
+    public void update(Integer index, String ...args) {
+        String []param = new String[2];
+        switch (index){
+            case 1:
+                connector.executePreparedStatement(
+                        script.UPDATE_USER_BYID + args[0], args[1]);
+                log.info("User successful updated");
+                break;
+            case 2:
+                System.arraycopy(args,1,param,0,args.length - 1);
+                connector.executePreparedStatement(script.UPDATE_ORDER + args[0], param);
+                log.info("Order successful updated");
+                break;
+            case 3:
+                System.arraycopy(args, 1,param, 0, args.length - 1);
+                connector.executePreparedStatement(script.UPDATE_ITEM + args[0], param);
+                log.info("Item successful updated");
+                break;
         }
     }
 
-
-
-    public void update(String user_id, String email) {
-        connector.executePreparedStatement(
-                script.UPDATE_USER_BYID + user_id, email);
-        log.info("User successful updated");
-
-    }
-
-    public void delete(String user_id) {
-        connector.executeStatement(
-                script.DELETE_BYID + user_id);
-
+    public void delete(Integer index, String id) {
+        switch (index) {
+            case 1:
+                connector.executeStatement(
+                        script.DELETE_BYID + id);
+                break;
+            case 2:
+                connector.executeStatement(
+                        script.DELETE_ORDER + id);
+                break;
+            case 3:
+                connector.executeStatement(
+                        script.DELETE_ITEM + id);
+                break;
+        }
     }
 
     private void format(@NotNull ResultSet resultSet) throws SQLException {

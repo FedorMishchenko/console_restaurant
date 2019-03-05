@@ -2,6 +2,7 @@ package restaurant.ui;
 
 
 import org.apache.log4j.Logger;
+import restaurant.service.Service;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ import static java.lang.System.exit;
 public class Menu {
     private static final Logger log = Logger.getLogger(Menu.class);
     private Scanner scanner = new Scanner(System.in);
+    private Service service = Service.getInstance();
 
 
     public void displayMenu() {
@@ -26,12 +28,14 @@ public class Menu {
             while (true) {
                 switch (scanner.nextInt()) {
                     case 1:
+                        new AdminMenu().check();
                         new AdminMenu().displayMenu();
                     case 2:
                         new UserMenu().displayMenu();
                     case 3:
                         new OrderMenu().displayMenu();
                     case 0:
+                        service.exit();
                         exit(0);
                     default:
                         log.warn("Illegal argument");
