@@ -69,9 +69,7 @@ public class HandlerDAO {
         } catch (SQLException e) {
             log.info(e.getMessage());
 
-        } /*finally {
-            connector.disconnectFromDB();
-        }*/
+        }
     }
 
 
@@ -102,14 +100,17 @@ public class HandlerDAO {
             case 1:
                 connector.executeStatement(
                         script.DELETE_BYID + id);
+                log.info("User successful deleted");
                 break;
             case 2:
                 connector.executeStatement(
                         script.DELETE_ORDER + id);
+                log.info("Order successful deleted");
                 break;
             case 3:
                 connector.executeStatement(
                         script.DELETE_ITEM + id);
+                log.info("Item successful deleted");
                 break;
         }
     }
@@ -131,6 +132,14 @@ public class HandlerDAO {
         } while (resultSet.next());
 
         System.out.println();
+    }
+
+    public void commit(){
+        connector.commit();
+    }
+
+    public void rollback(){
+        connector.rollback();
     }
 
     public void exit() {

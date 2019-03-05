@@ -32,11 +32,13 @@ public class JdbcConnector {
                     "&amp"+
                     "&serverTimezone=UTC";
             connection = DriverManager.getConnection(url, properties);
+            connection.setAutoCommit(false);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             log.warn(e.getMessage());
         }
     }
+
     public ResultSet readRecords(String sql_stmt) {
         try {
             statement = connection.createStatement();
@@ -84,4 +86,21 @@ public class JdbcConnector {
             log.warn(e.getMessage());
         }
     }
+
+    public void commit(){
+        try {
+            connection.commit();
+        } catch (SQLException e) {
+            log.warn(e.getMessage());
+        }
+    }
+
+    public void rollback(){
+        try {
+            connection.rollback();
+        } catch (SQLException e) {
+            log.warn(e.getMessage());
+        }
+    }
+
 }

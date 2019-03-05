@@ -58,7 +58,6 @@ import static java.lang.System.exit;
         }
     }
 
-
      void check () {
         menu.format("Enter password:");
         if ((scanner.nextLine()).equals(password)) {

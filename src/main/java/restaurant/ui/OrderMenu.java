@@ -18,8 +18,8 @@ import static java.lang.System.exit;
         menu.format("USER MENU:","1: Create Order",
                 "2: Read Orders","3: Update Order",
                 "4: Delete Order",
-                "5: ","6: Menu",
-                "7: ", "0: Exit",
+                "5: User menu","6: Menu",
+                "0: Exit",
                 "SELECT OPTION:");
         options();
     }
@@ -35,16 +35,15 @@ import static java.lang.System.exit;
                         service.read(index);
                         displayMenu();
                     case 3:
-
+                        service.update(index);
+                        displayMenu();
                     case 4:
+                        service.delete(index);
+                        displayMenu();
                     case 5:
-
-                        break;
+                        new UserMenu().displayMenu();
                     case 6:
                         new Menu().displayMenu();
-                    case 7:
-
-                        break;
                     case 0:
                         service.exit();
                         exit(0);
