@@ -19,7 +19,8 @@ import static java.lang.System.exit;
                 "2: Read Orders","3: Update Order",
                 "4: Delete Order",
                 "5: User menu","6: Menu",
-                "0: Exit",
+                "7: Save changes",
+                "8: Cancel changes", "0: Exit",
                 "SELECT OPTION:");
         options();
     }
@@ -44,6 +45,12 @@ import static java.lang.System.exit;
                         new UserMenu().displayMenu();
                     case 6:
                         new Menu().displayMenu();
+                    case 7:
+                        service.commit();
+                        displayMenu();
+                    case 8:
+                        service.rollback();
+                        displayMenu();
                     case 0:
                         service.exit();
                         exit(0);

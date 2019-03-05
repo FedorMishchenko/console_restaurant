@@ -13,12 +13,13 @@ public class Menu {
     private static final Logger log = Logger.getLogger(Menu.class);
     private Scanner scanner = new Scanner(System.in);
     private Service service = Service.getInstance();
+    private AdminMenu admin = new AdminMenu();
+    private UserMenu user = new UserMenu();
 
 
     public void displayMenu() {
         format("MENU:",
                 "1: Admin Menu", "2: User Menu",
-                "3: Order Menu",
                 "0: Exit","SELECT OPTION:");
         options();
     }
@@ -28,12 +29,11 @@ public class Menu {
             while (true) {
                 switch (scanner.nextInt()) {
                     case 1:
-                        new AdminMenu().check();
-                        new AdminMenu().displayMenu();
+                        admin.check();
+                        admin.displayMenu();
                     case 2:
-                        new UserMenu().displayMenu();
-                    case 3:
-                        new OrderMenu().displayMenu();
+
+                        user.login();
                     case 0:
                         service.exit();
                         exit(0);

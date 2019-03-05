@@ -20,8 +20,9 @@ import static java.lang.System.exit;
         menu.format("ADMIN MENU:", "1: Create Item",
                 "2: Items",
                 "3: Update Item", "4: Delete Item",
-                "5: Menu",
-                "0: Exit","SELECT OPTION:");
+                "5: Menu", "6: Commit",
+                "7: Rollback", "0: Exit",
+                "SELECT OPTION:");
         options();
     }
 
@@ -44,6 +45,12 @@ import static java.lang.System.exit;
                         displayMenu();
                     case 5:
                         new Menu().displayMenu();
+                    case 6:
+                        service.commit();
+                        displayMenu();
+                    case 7:
+                        service.rollback();
+                        displayMenu();
                     case 0:
                         service.exit();
                         exit(0);

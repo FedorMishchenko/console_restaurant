@@ -43,7 +43,6 @@ public class Service {
                 handler.create(index, args3);
                 break;
         }
-        commit();
     }
 
     public void read(Integer index){
@@ -93,7 +92,6 @@ public class Service {
                 handler.update(index, args3);
                 break;
         }
-        commit();
     }
 
     public void delete(Integer index){
@@ -114,26 +112,14 @@ public class Service {
                 handler.delete(index,item_id);
                 break;
         }
-        commit();
     }
 
-    private void commit() {
-        log.info("1: commit");
-        log.info("2: rollback");
-        log.info("3: continue");
-        switch (scanner.nextLine()){
-            case "1":
-                handler.commit();
-                break;
-            case "2":
-                handler.rollback();
-                break;
-            case "3":
-                break;
-            default:
-                log.info("Illegal argument");
-                break;
-        }
+    public void commit() {
+        handler.commit();
+    }
+
+    public void rollback(){
+        handler.rollback();
     }
 
     public void exit(){

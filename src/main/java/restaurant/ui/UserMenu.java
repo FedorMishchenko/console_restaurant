@@ -19,10 +19,12 @@ import static java.lang.System.exit;
                 "2: Read Users","3: Update User",
                 "4: Delete User",
                 "5: Order Menu","6: Menu",
-                "0: Exit",
+                "7: Save changes",
+                "8: Cancel changes","0: Exit",
                 "SELECT OPTION:");
         options();
     }
+
     private void options(){
         Integer index = 1;
         try {
@@ -44,6 +46,12 @@ import static java.lang.System.exit;
                         new OrderMenu().displayMenu();
                     case 6:
                         new Menu().displayMenu();
+                    case 7:
+                        service.commit();
+                        displayMenu();
+                    case 8:
+                        service.rollback();
+                        displayMenu();
                     case 0:
                         service.exit();
                         exit(0);
@@ -56,6 +64,9 @@ import static java.lang.System.exit;
             logger.warn("Number format expected");
             displayMenu();
         }
+    }
+
+     void login(){
 
     }
 }
