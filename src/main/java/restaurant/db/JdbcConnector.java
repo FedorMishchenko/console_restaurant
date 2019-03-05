@@ -59,11 +59,13 @@ public class JdbcConnector {
         }
     }
 
-    public void executePreparedStatement(String sql_stmt, String ... args){
+    public void executePreparedStatement(String sql_stmt, String ...args){
         try {
             preparedStatement = connection.prepareStatement(sql_stmt);
-            for(int i = 1; i <= args.length; i++){
-                preparedStatement.setObject(i, args[i]);
+            int i = 1;
+            for (Object obj: args){
+                preparedStatement.setObject(i,obj);
+                i++;
             }
             preparedStatement.executeUpdate();
         }catch (SQLException e){
