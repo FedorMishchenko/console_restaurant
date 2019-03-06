@@ -6,21 +6,22 @@ import restaurant.service.Service;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static java.lang.System.exit;
-
- class OrderMenu {
+public class OrderMenu {
     private static final Logger logger = Logger.getLogger(OrderMenu.class);
     private Scanner scanner = new Scanner(System.in);
-    private Menu menu = new Menu();
+    private Format f = new Format();
     private Service service = Service.getInstance();
+    private String id = LoginPage.id;
+    public String getId(){
+        return this.id;
+    }
 
-     void displayMenu(){
-        menu.format("USER MENU:","1: Create Order",
+      void displayMenu(){
+        f.format("USER MENU:","1: Create Order",
                 "2: Read Orders","3: Update Order",
-                "4: Delete Order",
-                "5: User menu","6: Menu",
-                "7: Save changes",
-                "8: Cancel changes", "0: Exit",
+                "4: Delete Order", "5: Save changes",
+                "6: Cancel changes", "7: Log out",
+                "0: Exit",
                 "SELECT OPTION:");
         options();
     }
@@ -42,18 +43,16 @@ import static java.lang.System.exit;
                         service.delete(index);
                         displayMenu();
                     case 5:
-                        new UserMenu().displayMenu();
-                    case 6:
-                        new Menu().displayMenu();
-                    case 7:
                         service.commit();
                         displayMenu();
-                    case 8:
+                    case 6:
                         service.rollback();
                         displayMenu();
+                    case 7:
+                        new LoginPage().loginWindow();
                     case 0:
                         service.exit();
-                        exit(0);
+                        System.exit(0);
                     default:
                         logger.warn("Illegal argument");
                         displayMenu();

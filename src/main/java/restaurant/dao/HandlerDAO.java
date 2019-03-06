@@ -115,6 +115,24 @@ public class HandlerDAO {
         }
     }
 
+    public String[] findId(String email, String password){
+        ResultSet resultSet;
+        resultSet = connector.readRecords("SELECT id, email FROM restaurant.customer WHERE " +
+                "email = '" + email + /*"' , password = '" + password + */"'");
+        String id = null;
+        String user_email = null;
+        try {
+            if(resultSet.next()) {
+                id = resultSet.getString(1);
+                user_email = resultSet.getString(2);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new String[]{id, user_email};
+    }
+
     private void format(@NotNull ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();
         int count = metaData.getColumnCount();

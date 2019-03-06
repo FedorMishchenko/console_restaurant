@@ -4,6 +4,9 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import restaurant.dao.HandlerDAO;
 import org.apache.log4j.Logger;
+import restaurant.ui.Format;
+import restaurant.ui.LoginPage;
+import restaurant.ui.OrderMenu;
 
 import java.util.Scanner;
 
@@ -20,14 +23,17 @@ public class Service {
     public void create(Integer index){
         switch (index){
             case 1:
+                String []args1 = new String[2];
                 log.info("Enter email:");
-                String args1 = scanner.nextLine();
+                args1[0] = scanner.nextLine();
+                log.info("Enter password:");
+                args1[1] = scanner.nextLine();
                 handler.create(index, args1);
                 break;
             case 2:
                 String []args2 = new String[3];
-                log.info("Enter user_id");
-                args2[0] = scanner.nextLine();
+                /*log.info("Enter user_id");*/
+                args2[0] = new OrderMenu().getId();
                 log.info("Enter item");
                 args2[1] = scanner.nextLine();
                 log.info("Enter price");
@@ -51,8 +57,7 @@ public class Service {
                 handler.read(index, null);
                 break;
             case 2:
-                log.info("Enter user_id");
-                String id = scanner.nextLine();
+                String id = new OrderMenu().getId();
                 handler.read(index, id);
                 break;
             case 3:
@@ -73,8 +78,8 @@ public class Service {
                 break;
             case 2:
                 String [] args2 = new String[3];
-                log.info("Enter user_id");
-                args2[0] = scanner.nextLine();
+                /*log.info("Enter user_id");*/
+                args2[0] = new OrderMenu().getId();
                 log.info("Enter item");
                 args2[1] = scanner.nextLine();
                 log.info("Enter price");
@@ -113,6 +118,10 @@ public class Service {
                 break;
         }
     }
+    public String[] findUser(String...args){
+        new Format().format( "User : " + args[0] + " : " +  args[1]);
+        return handler.findId(args[0],args[1]);
+    }
 
     public void commit() {
         handler.commit();
@@ -124,7 +133,6 @@ public class Service {
 
     public void exit(){
         handler.exit();
-        log.info("Connection close");
     }
 
 }

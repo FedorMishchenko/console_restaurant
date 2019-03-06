@@ -6,22 +6,21 @@ import restaurant.service.Service;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static java.lang.System.exit;
-
  class AdminMenu {
     private static final Logger logger = Logger.getLogger(AdminMenu.class);
     private final String password = "www";
-    private Menu menu = new Menu();
+     private Format f = new Format();
     private Service service = Service.getInstance();
     private Scanner scanner = new Scanner(System.in);
 
 
-     void displayMenu() {
-        menu.format("ADMIN MENU:", "1: Create Item",
+      void displayMenu() {
+        f.format("ADMIN MENU:", "1: Create Item",
                 "2: Items",
                 "3: Update Item", "4: Delete Item",
-                "5: Menu", "6: Commit",
-                "7: Rollback", "0: Exit",
+                "5: User Menu", "6: Order menu",
+                "7: Commit", "8: Rollback",
+                "9: Log out","0: Exit",
                 "SELECT OPTION:");
         options();
     }
@@ -44,16 +43,20 @@ import static java.lang.System.exit;
                         service.delete(index);
                         displayMenu();
                     case 5:
-                        new Menu().displayMenu();
+                        new UserMenu().displayMenu();
                     case 6:
+                        new OrderMenu().displayMenu();
+                    case 7:
                         service.commit();
                         displayMenu();
-                    case 7:
+                    case 8:
                         service.rollback();
                         displayMenu();
+                    case 9:
+                        new LoginPage().loginWindow();
                     case 0:
                         service.exit();
-                        exit(0);
+                        System.exit(0);
                     default:
                         logger.warn("Illegal argument");
                         displayMenu();
@@ -65,13 +68,4 @@ import static java.lang.System.exit;
         }
     }
 
-     void check () {
-        menu.format("Enter password:");
-        if ((scanner.nextLine()).equals(password)) {
-            logger.info("Password accepted");
-        } else {
-            logger.info("Invalid password");
-            new Menu().displayMenu();
-        }
-    }
 }

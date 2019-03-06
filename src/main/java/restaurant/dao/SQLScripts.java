@@ -13,11 +13,11 @@ import org.jetbrains.annotations.NotNull;
 /*
     -----------------------------------------------------------------------
 */
-     final String GET_USERS = "SELECT id, email FROM restaurant.customer";
-     final String CREATE_USER = "INSERT INTO restaurant.customer (email) " +
-             "VALUES ( ? )";
+     final String GET_USERS = "SELECT id, email, password FROM restaurant.customer";
+     final String CREATE_USER = "INSERT INTO restaurant.customer (email, password) " +
+             "VALUES ( ?, ? )";
      final String UPDATE_USER_BYID = "UPDATE " +
-             "restaurant.customer SET email = ?  WHERE id = ";
+             "restaurant.customer SET email = ?, password = ? WHERE id = ";
      final String DELETE_BYID = "DELETE FROM restaurant.customer WHERE id = ";
 /*
      -----------------------------------------------------------------------
@@ -38,5 +38,9 @@ import org.jetbrains.annotations.NotNull;
     final String UPDATE_ITEM = "UPDATE restaurant.menu SET item = ?, price = ? " +
             "WHERE id = ";
     final String DELETE_ITEM = "DELETE FROM restaurant.menu WHERE id = ";
-
+/*
+     -----------------------------------------------------------------------
+*/
+    final String FIND_USER_BYID = "SELECT id FROM restaurant.customer WHERE " +
+        "email = ?, password = ?";
 }

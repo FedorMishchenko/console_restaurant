@@ -1,10 +1,10 @@
 package restaurant;
 
-
-import restaurant.ui.Menu;
+import restaurant.ui.LoginPage;
 
 public class Main {
     public static void main(String[] args) {
-        new Menu().displayMenu();
+
+        new LoginPage().loginWindow();
     }
 }

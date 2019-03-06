@@ -51,6 +51,21 @@ public class JdbcConnector {
         return resultSet;
     }
 
+/*    public ResultSet findRecord(String sql_stmt, String...args){
+        try {
+            preparedStatement = connection.prepareStatement(sql_stmt);
+            int i = 1;
+            for (Object obj: args){
+                preparedStatement.setObject(i,obj);
+                i++;
+            }
+            resultSet = preparedStatement.executeQuery(sql_stmt);
+        }catch (SQLException e){
+            log.warn(e.getMessage());
+        }
+        return resultSet;
+    }*/
+
     public void executeStatement(String sql_stmt) {
         try {
             statement = connection.createStatement();

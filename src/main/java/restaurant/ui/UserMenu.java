@@ -6,21 +6,19 @@ import restaurant.service.Service;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static java.lang.System.exit;
 
  class UserMenu {
     private static final Logger logger = Logger.getLogger(UserMenu.class);
-    private Menu menu = new Menu();
+     private Format f = new Format();
     private Service service = Service.getInstance();
     private Scanner scanner = new Scanner(System.in);
 
      void displayMenu(){
-        menu.format("USER MENU:","1: Create User",
+        f.format("USER MENU:","1: Create User",
                 "2: Read Users","3: Update User",
-                "4: Delete User",
-                "5: Order Menu","6: Menu",
-                "7: Save changes",
-                "8: Cancel changes","0: Exit",
+                "4: Delete User", "5: Save changes",
+                "6: Cancel changes",
+                "7: Log out","0: Exit",
                 "SELECT OPTION:");
         options();
     }
@@ -43,25 +41,23 @@ import static java.lang.System.exit;
                         service.delete(index);
                         displayMenu();
                     case 5:
-                        new OrderMenu().displayMenu();
-                    case 6:
-                        new Menu().displayMenu();
-                    case 7:
                         service.commit();
                         displayMenu();
-                    case 8:
+                    case 6:
                         service.rollback();
                         displayMenu();
+                    case 7:
+                        new LoginPage().loginWindow();
                     case 0:
                         service.exit();
-                        exit(0);
+                        System.exit(0);
                     default:
-                        logger.warn("Illegal argument");
+                        logger.warn("Not legal argument");
                         displayMenu();
                 }
             }
         }catch (InputMismatchException e){
-            logger.warn("Number format expected");
+            logger.warn("Number expected");
             displayMenu();
         }
     }
