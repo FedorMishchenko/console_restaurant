@@ -15,6 +15,12 @@ public final class ItemDto implements EntityDto {
 
     }
 
+    public ItemDto(String item, String price) {
+        this.item = item;
+        this.price = price;
+    }
+
+
     @Contract(pure = true)
     public String getPrice() {
          return this.price;

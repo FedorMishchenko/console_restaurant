@@ -14,6 +14,10 @@ public final class OrderDto implements EntityDto {
 
     public OrderDto() {
     }
+    public OrderDto(String item,String price){
+        this.item = item;
+        this.price = price;
+    }
 
     @Contract(pure = true)
     public String getItem() {

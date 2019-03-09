@@ -14,6 +14,11 @@ public final class UserDto implements EntityDto {
     public UserDto() {
     }
 
+    public UserDto(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
     @Contract(pure = true)
     public String getLogin() {
         return login;

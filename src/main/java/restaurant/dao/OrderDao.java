@@ -24,22 +24,12 @@ public class OrderDao {
 
     }
 
-    public Order find(User entity) {
+    public Order find(Order entity) {
         try  (Connection connection = new DBFactory().getInstance().getConnection()){
             PreparedStatement statement = connection.prepareStatement(
                     Query.GET_ORDERS_BYID);
-            statement.setInt(1, entity.getId());
-
-            ResultSet resultSet = statement.executeQuery();
-
-            Order order = new Order();
-            while (resultSet.next()) {
-                order.setOrderId(entity.getId());
-                order.setUserId(resultSet.getInt(2));
-                order.setItem(resultSet.getString(3));
-                order.setPrice(resultSet.getString(4));
-            }
-            return order;
+      
+            return null;
         } catch (SQLException e) {
             throw new EntityDaoException(e);
         }
@@ -69,15 +59,16 @@ public class OrderDao {
         }
     }
 
-    public void update(Order order) {
-        Integer id = order.getOrderId();
+    public void update(Order oldOrder, Order newOrder) {
+        Integer id = oldOrder.getOrderId();
         try  (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                    Query.UPDATE_ORDER + id);
-            connection.setTransactionIsolation(4);
+                    Query.UPDATE_ORDER);
 
+            statement.setString(1, newOrder.getItem());
+            statement.setString(2, newOrder.getPrice());
+            statement.setInt(3, id);
             statement.executeUpdate();
-            /*return null;*/
         } catch (SQLException e) {
             throw new EntityDaoException(e);
         }
@@ -89,9 +80,7 @@ public class OrderDao {
             PreparedStatement statement = connection.prepareStatement(
                     Query.DELETE_ORDER + id);
 
-            ResultSet resultSet = statement.executeQuery();
-            ResultSetMetaData metaData = resultSet.getMetaData();
-          /*  return metaData.getColumnCount();*/
+            statement.executeUpdate();
 
         } catch (SQLException e) {
             throw new EntityDaoException(e);
