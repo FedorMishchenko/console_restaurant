@@ -9,18 +9,19 @@ import java.util.Objects;
 public final class ItemDto implements EntityDto {
     private Integer id;
     private String item;
-    private Integer price;
+    private String price;
 
     public ItemDto() {
+
     }
 
     @Contract(pure = true)
-    public Integer getPrice() {
-        return price;
+    public String getPrice() {
+         return this.price;
     }
 
     @Contract("_ -> this")
-    public ItemDto setPrice(Integer price) {
+    public ItemDto setPrice(String price) {
         this.price = price;
         return this;
     }

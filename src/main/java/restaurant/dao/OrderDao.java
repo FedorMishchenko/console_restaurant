@@ -17,7 +17,6 @@ public class OrderDao {
             PreparedStatement statement = connection.prepareStatement(Query.CREATE_ORDER);
 
             statement.setInt(2, entity.getUserId());
-
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new EntityDaoException(e);

@@ -12,23 +12,21 @@ import java.util.List;
 public class ItemDao {
 
     public void create(Item entity) {
-        try  (Connection connection = new DBFactory().getInstance().getConnection()) {
+        try (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
                     Query.CREATE_ITEM);
 
             statement.setString(2, entity.getItem());
             statement.setString(3, entity.getPrice());
 
-           statement.executeUpdate();
-         /*  return new Item();*/
-
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new EntityDaoException(e);
         }
     }
 
     public Item find(Item entity) {
-        try  (Connection connection = new DBFactory().getInstance().getConnection()){
+        try (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
                     Query.GET_ITEM_BY_NAME);
             statement.setString(1, entity.getItem());
@@ -37,7 +35,7 @@ public class ItemDao {
 
             Item item = new Item();
             while (resultSet.next()) {
-                /*item.setId();*/
+                item.setId(resultSet.getInt(1));
                 item.setItem(resultSet.getString(2));
                 item.setPrice(resultSet.getString(3));
             }
@@ -47,14 +45,14 @@ public class ItemDao {
         }
     }
 
-    public void update(Item entity) {
-        try  (Connection connection = new DBFactory().getInstance().getConnection()){
+    public void update(Item oldItem, Item newItem) {
+        try (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
                     Query.UPDATE_ITEM_BYID);
-
-            statement.setInt(1, entity.getId());
-            statement.setString(2,entity.getItem());
-            statement.setString(3,entity.getPrice());
+            Item item = find(oldItem);
+            statement.setInt(1, newItem.getId());
+            statement.setString(2, newItem.getItem());
+            statement.setString(3, newItem.getPrice());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new EntityDaoException(e);
@@ -62,25 +60,21 @@ public class ItemDao {
     }
 
     public void delete(Item entity) {
-        try  (Connection connection = new DBFactory().getInstance().getConnection()) {
+        try (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
                     Query.DELETE_ITEM_BYID);
 
             statement.setInt(1, entity.getId());
-
-            ResultSet resultSet = statement.executeQuery();
-            ResultSetMetaData metaData = resultSet.getMetaData();
-
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new EntityDaoException(e);
         }
     }
 
-    public List<Item> getItems(){
-        try  (Connection connection = new DBFactory().getInstance().getConnection()) {
+    public List<Item> getItems() {
+        try (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
                     Query.GET_ITEMS);
-            connection.setTransactionIsolation(4);
             ResultSet resultSet = statement.executeQuery();
 
             List<Item> list = new ArrayList<>();

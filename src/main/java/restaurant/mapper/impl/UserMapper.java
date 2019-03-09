@@ -6,17 +6,16 @@ import restaurant.mapper.Mapper;
 
 public class UserMapper implements Mapper<UserDto, User> {
     @Override
-    public User mapToObject(UserDto userDto) {
+    public User mapToObject(UserDto origin) {
         User user = new User();
-        user.setLogin(userDto.getLogin());
-        user.setPassword(userDto.getPassword());
+        user.setLogin(origin.getLogin());
+        user.setPassword(origin.getPassword());
         return user;
     }
 
     @Override
-    public UserDto mapToDto(User object) {
-
-        return new UserDto(object.getLogin(),
-                object.getPassword());
+    public UserDto mapToDto(User user) {
+        return new UserDto(user.getLogin(),
+                user.getPassword());
     }
 }

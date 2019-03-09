@@ -24,16 +24,29 @@ public class ItemService implements Service<Item> {
 
     @Override
     public Item get(Item entity) {
-        return null;
+
+        try {
+            return itemDao.find(entity);
+        }catch (Exception e){
+            throw new MyApplicationException(e);
+        }
     }
 
     @Override
     public void update(Item entity1, Item entity2) {
-
+        try {
+            itemDao.update(entity1, entity2);
+        }catch (Exception e){
+            throw new MyApplicationException(e);
+        }
     }
 
     @Override
     public void delete(Item entity) {
-
+        try {
+            itemDao.delete(entity);
+        }catch (Exception e){
+            throw new MyApplicationException(e);
+        }
     }
 }

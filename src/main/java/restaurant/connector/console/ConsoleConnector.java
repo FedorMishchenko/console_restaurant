@@ -92,8 +92,8 @@ public class ConsoleConnector {
         log.info("Enter price:");
         String price = scanner.nextLine();
         log.info("Enter user id:");
-        Integer id = scanner.nextInt();
-        return new OrderDto().setItem(item).setPrice(price).setUserId(id);
+        Integer userId = scanner.nextInt();
+        return new OrderDto().setItem(item).setPrice(price).setUserId(userId);
 
     }
     @Nullable
@@ -102,7 +102,7 @@ public class ConsoleConnector {
         log.info("Enter item:");
         String item = scanner.nextLine();
         log.info("Enter price:");
-        Integer price = scanner.nextInt();
+        String price = scanner.nextLine();
         return new ItemDto().setItem(item).setPrice(price);
     }
 }
