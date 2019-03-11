@@ -7,7 +7,6 @@ import restaurant.dto.EntityDto;
 public final class UserOrderDto implements EntityDto {
     @Nullable
     @Contract(pure = true)
-    @Override
     public Integer getId() {
         return null;
     }

@@ -35,7 +35,7 @@ public class Query {
             "VALUES ( ?, ? )";
     public static final String UPDATE_ITEM_BYID = "UPDATE menu SET item = ?, price = ? " +
             "WHERE id = ?";
-    public static final String DELETE_ITEM_BYID = "DELETE FROM menu WHERE id = ?";
+    public static final String DELETE_ITEM = "DELETE FROM menu WHERE item = ?";
     /*
      -----------------------------------------------------------------------
     */

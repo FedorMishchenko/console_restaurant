@@ -2,7 +2,6 @@ package restaurant.service.impl;
 
 import restaurant.dao.OrderDao;
 import restaurant.entity.Order;
-import restaurant.entity.User;
 import restaurant.exceptions.MyApplicationException;
 import restaurant.service.Service;
 

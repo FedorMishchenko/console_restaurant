@@ -42,7 +42,6 @@ public final class UserDto implements EntityDto {
     }
 
     @Contract(pure = true)
-    @Override
     public Integer getId() {
         return id;
     }

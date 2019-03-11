@@ -5,7 +5,7 @@ import restaurant.entity.User;
 import restaurant.exceptions.MyApplicationException;
 import restaurant.service.Service;
 
-public class UserService implements Service <User> {
+public class UserService implements Service<User> {
     private UserDao userDao;
     public UserService(){
         userDao = new UserDao();

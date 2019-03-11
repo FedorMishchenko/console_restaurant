@@ -54,7 +54,6 @@ public final class OrderDto implements EntityDto {
 
     @Nullable
     @Contract(pure = true)
-    @Override
     public Integer getId() {
         return this.userId;
     }
@@ -78,11 +77,10 @@ public final class OrderDto implements EntityDto {
     @NotNull
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("OrderDto{");
-        sb.append("userId=").append(userId);
-        sb.append(", item='").append(item).append('\'');
-        sb.append(", price='").append(price).append('\'');
-        sb.append('}');
-        return sb.toString();
+        String sb = "OrderDto{" + "userId=" + userId +
+                ", item='" + item + '\'' +
+                ", price='" + price + '\'' +
+                '}';
+        return sb;
     }
 }

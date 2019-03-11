@@ -3,20 +3,21 @@ package restaurant.dao;
 import restaurant.common.Query;
 import restaurant.connector.db.DBFactory;
 import restaurant.entity.Order;
-import restaurant.entity.User;
 import restaurant.exceptions.EntityDaoException;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDao {
+public class OrderDao implements EntityDao<Order>{
 
+    @Override
     public void create(Order entity) {
         try  (Connection connection = new DBFactory().getInstance().getConnection()){
             PreparedStatement statement = connection.prepareStatement(Query.CREATE_ORDER);
-
-            statement.setInt(2, entity.getUserId());
+            statement.setInt(1, entity.getUserId());
+            statement.setString(2, entity.getItem());
+            statement.setString(3, entity.getPrice());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new EntityDaoException(e);
@@ -24,6 +25,7 @@ public class OrderDao {
 
     }
 
+    @Override
     public Order find(Order entity) {
         try  (Connection connection = new DBFactory().getInstance().getConnection()){
             PreparedStatement statement = connection.prepareStatement(
@@ -40,7 +42,6 @@ public class OrderDao {
             PreparedStatement statement = connection.prepareStatement(
                     Query.GET_ORDERS_BYID);
             statement.setInt(2, id);
-            connection.setTransactionIsolation(4);
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -59,6 +60,7 @@ public class OrderDao {
         }
     }
 
+    @Override
     public void update(Order oldOrder, Order newOrder) {
         Integer id = oldOrder.getOrderId();
         try  (Connection connection = new DBFactory().getInstance().getConnection()) {
@@ -74,6 +76,7 @@ public class OrderDao {
         }
     }
 
+    @Override
     public void delete(Order order) {
         try  (Connection connection = new DBFactory().getInstance().getConnection()) {
             Integer id = order.getOrderId();

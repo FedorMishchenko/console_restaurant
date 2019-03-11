@@ -9,15 +9,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemDao {
+public class ItemDao implements EntityDao<Item>{
 
+    @Override
     public void create(Item entity) {
         try (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
                     Query.CREATE_ITEM);
 
-            statement.setString(2, entity.getItem());
-            statement.setString(3, entity.getPrice());
+            statement.setString(1, entity.getItem());
+            statement.setString(2, entity.getPrice());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -25,6 +26,7 @@ public class ItemDao {
         }
     }
 
+    @Override
     public Item find(Item entity) {
         try (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
@@ -45,6 +47,7 @@ public class ItemDao {
         }
     }
 
+    @Override
     public void update(Item oldItem, Item newItem) {
         try (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
@@ -59,12 +62,13 @@ public class ItemDao {
         }
     }
 
+    @Override
     public void delete(Item entity) {
         try (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                    Query.DELETE_ITEM_BYID);
+                    Query.DELETE_ITEM);
 
-            statement.setInt(1, entity.getId());
+            statement.setString(1, entity.getItem());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new EntityDaoException(e);
@@ -90,4 +94,5 @@ public class ItemDao {
             throw new EntityDaoException(e);
         }
     }
+
 }

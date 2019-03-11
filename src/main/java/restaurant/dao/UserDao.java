@@ -10,8 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao {
+public class UserDao implements EntityDao<User>{
 
+    @Override
     public void create(User entity) {
         try  (Connection connection = new DBFactory().getInstance().getConnection()){
             PreparedStatement statement = connection.prepareStatement(
@@ -25,7 +26,7 @@ public class UserDao {
         }
     }
 
-
+    @Override
     public User find(User entity){
         try  (Connection connection = new DBFactory().getInstance().getConnection()){
             PreparedStatement statement = connection.prepareStatement(
@@ -46,6 +47,7 @@ public class UserDao {
         }
     }
 
+    @Override
     public void update(User oldUser, User newUser) {
         try  (Connection connection = new DBFactory().getInstance().getConnection()){
             PreparedStatement statement = connection.prepareStatement(
@@ -60,6 +62,7 @@ public class UserDao {
         }
     }
 
+    @Override
     public void delete(User entity) {
         try  (Connection connection = new DBFactory().getInstance().getConnection()){
             PreparedStatement statement = connection.prepareStatement(

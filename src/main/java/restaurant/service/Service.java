@@ -1,6 +1,5 @@
 package restaurant.service;
 
-
 public interface Service<T> {
     void create(T entity);
 

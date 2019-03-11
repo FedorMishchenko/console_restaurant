@@ -50,7 +50,6 @@ public final class ItemDto implements EntityDto {
     }
 
     @Contract(pure = true)
-    @Override
     public Integer getId() {
         return this.id;
     }
