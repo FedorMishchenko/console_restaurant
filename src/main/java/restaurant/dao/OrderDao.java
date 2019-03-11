@@ -62,14 +62,13 @@ public class OrderDao implements EntityDao<Order>{
 
     @Override
     public void update(Order oldOrder, Order newOrder) {
-        Integer id = oldOrder.getOrderId();
         try  (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
                     Query.UPDATE_ORDER);
 
             statement.setString(1, newOrder.getItem());
             statement.setString(2, newOrder.getPrice());
-            statement.setInt(3, id);
+            statement.setString(3, oldOrder.getItem());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new EntityDaoException(e);
@@ -79,10 +78,10 @@ public class OrderDao implements EntityDao<Order>{
     @Override
     public void delete(Order order) {
         try  (Connection connection = new DBFactory().getInstance().getConnection()) {
-            Integer id = order.getOrderId();
             PreparedStatement statement = connection.prepareStatement(
-                    Query.DELETE_ORDER + id);
-
+                    Query.DELETE_ORDER);
+            statement.setInt(1, order.getUserId());
+            statement.setString(2,order.getItem());
             statement.executeUpdate();
 
         } catch (SQLException e) {

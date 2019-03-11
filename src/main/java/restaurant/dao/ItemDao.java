@@ -51,11 +51,10 @@ public class ItemDao implements EntityDao<Item>{
     public void update(Item oldItem, Item newItem) {
         try (Connection connection = new DBFactory().getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
-                    Query.UPDATE_ITEM_BYID);
-            Item item = find(oldItem);
-            statement.setInt(1, newItem.getId());
-            statement.setString(2, newItem.getItem());
-            statement.setString(3, newItem.getPrice());
+                    Query.UPDATE_ITEM);
+            statement.setString(1, newItem.getItem());
+            statement.setString(2, newItem.getPrice());
+            statement.setString(3, oldItem.getItem());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new EntityDaoException(e);

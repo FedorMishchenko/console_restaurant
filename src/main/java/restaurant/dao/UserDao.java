@@ -51,11 +51,10 @@ public class UserDao implements EntityDao<User>{
     public void update(User oldUser, User newUser) {
         try  (Connection connection = new DBFactory().getInstance().getConnection()){
             PreparedStatement statement = connection.prepareStatement(
-                    Query.UPDATE_USER_BYID);
-            User user = find(oldUser);
+                    Query.UPDATE_USER);
             statement.setString(1,newUser.getLogin());
             statement.setString(2,newUser.getPassword());
-            statement.setInt(3, user.getId());
+            statement.setString(3, oldUser.getLogin());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new EntityDaoException(e);

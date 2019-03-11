@@ -7,8 +7,8 @@ public class Query {
     */
     public static final String CREATE_USER = "INSERT INTO customer (email, password) " +
             "VALUES ( ?, ? )";
-    public static final String UPDATE_USER_BYID = "UPDATE " +
-            "restaurant.customer SET email = ?, password = ? WHERE id = ?";
+    public static final String UPDATE_USER = "UPDATE " +
+            "restaurant.customer SET email = ?, password = ? WHERE email = ?";
     public static final String DELETE_USER_BY_LOGIN = "DELETE FROM customer WHERE email = ?";
     public static final String GET_USERS = "SELECT id, email, password FROM customer";
     public static final String GET_USER_BYID = "SELECT id, email, password FROM customer " +
@@ -23,8 +23,8 @@ public class Query {
     public static final String CREATE_ORDER = "INSERT INTO order (customer_id, item, price) " +
             "VALUES ( ?, ?, ? ) ";
     public static final String UPDATE_ORDER = "UPDATE order SET item = ? , price = ? " +
-            "WHERE id = ?";
-    public static final String DELETE_ORDER = "DELETE FROM order WHERE id = ?";
+            "WHERE item = ?";
+    public static final String DELETE_ORDER = "DELETE FROM order WHERE customer_id = ? , item = ?";
     /*
          -----------------------------------------------------------------------
     */
@@ -33,8 +33,8 @@ public class Query {
             "WHERE item = ?";
     public static final String CREATE_ITEM = "INSERT INTO menu (item, price) " +
             "VALUES ( ?, ? )";
-    public static final String UPDATE_ITEM_BYID = "UPDATE menu SET item = ?, price = ? " +
-            "WHERE id = ?";
+    public static final String UPDATE_ITEM = "UPDATE menu SET item = ?, price = ? " +
+            "WHERE item = ?";
     public static final String DELETE_ITEM = "DELETE FROM menu WHERE item = ?";
     /*
      -----------------------------------------------------------------------
